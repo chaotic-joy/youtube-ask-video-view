@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Theater Mode Exit on Ask",
+  "version": "1.0.0",
+  "description": "Switches YouTube out of theater mode into default view when you click the Ask button.",
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["theater-logic.js", "content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
