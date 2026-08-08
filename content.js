@@ -21,7 +21,23 @@ document.addEventListener(
     // DOM was rebuilt when theater mode exited).
     setTimeout(() => {
       document.querySelector('button[aria-label="Ask"]')?.click();
+      clickSummarizeChipWhenReady();
     }, 100);
   },
   true
 );
+
+// 4. Once the Ask panel renders its suggestion chips, click "Summarize the
+// video". The panel takes a moment to appear, so poll for it briefly.
+function clickSummarizeChipWhenReady(attemptsLeft = 20) {
+  const chip = Array.from(document.querySelectorAll('.ytwYouChatChipsDataChip')).find(
+    (el) => el.textContent.trim() === 'Summarize the video'
+  );
+  if (chip) {
+    chip.click();
+    return;
+  }
+  if (attemptsLeft > 0) {
+    setTimeout(() => clickSummarizeChipWhenReady(attemptsLeft - 1), 150);
+  }
+}
