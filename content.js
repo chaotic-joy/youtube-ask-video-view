@@ -1,7 +1,11 @@
+console.log('[theater-debug] content.js loaded');
+
 document.addEventListener(
   'click',
   (event) => {
     const theaterModeActive = Boolean(document.querySelector('ytd-watch-flexy[theater]'));
+    const askMatch = event.target.closest ? event.target.closest('button[aria-label="Ask"]') : null;
+    console.log('[theater-debug] click, target=%s, theaterModeActive=%s, askMatch=%s', event.target.tagName, theaterModeActive, Boolean(askMatch));
     if (shouldExitTheater(event.target, theaterModeActive)) {
       const toggleButton = document.querySelector('#movie_player .ytp-size-button');
       if (toggleButton) {
